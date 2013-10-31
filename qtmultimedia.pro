@@ -17,19 +17,21 @@ win32 {
     contains(QT_CONFIG, alsa):qtCompileTest(alsa)
     contains(QT_CONFIG, pulseaudio):qtCompileTest(pulseaudio)
 
-    isEmpty(GST_VERSION) {
-        contains(QT_CONFIG, gstreamer-0.10) {
-            GST_VERSION = 0.10
-        } else: contains(QT_CONFIG, gstreamer-1.0) {
-            GST_VERSION = 1.0
+    !done_config_gstreamer {
+        isEmpty(GST_VERSION) {
+            contains(QT_CONFIG, gstreamer-0.10) {
+                GST_VERSION = 0.10
+            } else: contains(QT_CONFIG, gstreamer-1.0) {
+                GST_VERSION = 1.0
+            }
         }
-    }
-    cache(GST_VERSION, set)
-    !isEmpty(GST_VERSION):qtCompileTest(gstreamer) {
-        qtCompileTest(gstreamer_photography)
-        qtCompileTest(gstreamer_encodingprofiles)
-        qtCompileTest(gstreamer_appsrc)
-        qtCompileTest(linux_v4l)
+        cache(GST_VERSION, set)
+        !isEmpty(GST_VERSION):qtCompileTest(gstreamer) {
+            qtCompileTest(gstreamer_photography)
+            qtCompileTest(gstreamer_encodingprofiles)
+            qtCompileTest(gstreamer_appsrc)
+            qtCompileTest(linux_v4l)
+        }
     }
 
     qtCompileTest(resourcepolicy)
