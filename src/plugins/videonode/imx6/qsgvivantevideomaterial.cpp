@@ -37,8 +37,9 @@
 **
 ****************************************************************************/
 
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
+// use lgl2.h instead of <GLES2/gl2.h> and <GLES2/gl2ext.h>,
+// fixes a conflicting declaration issue.
+#include "lgl2.h"
 
 #include "qsgvivantevideomaterial.h"
 #include "qsgvivantevideomaterialshader.h"
